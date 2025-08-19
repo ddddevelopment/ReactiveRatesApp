@@ -15,6 +15,9 @@
 	
 	<modules>
 		<module>infrastructure/eureka-server</module>
+		<module>services/rates-service</module>
+		<module>services/auth-service</module>
+		<module>services/users-service</module>
 	</modules>
 	
 	<name>Reactive Rates</name>
