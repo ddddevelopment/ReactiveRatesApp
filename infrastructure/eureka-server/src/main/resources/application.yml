@@ -1,0 +1,57 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    hostname: localhost
+    # Предпочитать IP адрес вместо hostname
+    prefer-ip-address: false
+    
+  client:
+    # ВАЖНО: Eureka Server не должен регистрировать сам себя как клиент
+    register-with-eureka: false
+    # ВАЖНО: Eureka Server не должен получать реестр от других серверов
+    fetch-registry: false
+    
+    # URL для регистрации клиентов (ПРАВИЛЬНАЯ СТРУКТУРА!)
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      
+  server:
+    # В режиме разработки отключаем самозащиту
+    enable-self-preservation: false
+    
+    # Как часто сервер проверяет неактивные сервисы (в миллисекундах)
+    eviction-interval-timer-in-ms: 2000
+    
+    # Ожидаемое количество обновлений в минуту
+    expected-client-renewal-interval-seconds: 30
+    
+    # Время ожидания синхронизации реестра при запуске
+    wait-time-in-ms-when-sync-empty: 0
+
+# Настройки мониторинга
+management:
+  endpoints:
+    web:
+      exposure:
+        # Открываем эндпоинты для мониторинга
+        include: health,info,metrics,env,eureka
+  endpoint:
+    health:
+      show-details: always
+
+# Настройки логирования
+logging:
+  level:
+    # Отключаем избыточные логи Eureka
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
+    # Включаем отладочные логи для Spring Cloud
+    org.springframework.cloud.netflix.eureka: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
