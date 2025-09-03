@@ -15,6 +15,7 @@
 	
 	<modules>
 		<module>infrastructure/eureka-server</module>
+		<module>infrastructure/config-server</module>
 		<module>services/rates-service</module>
 		<module>services/auth-service</module>
 		<module>services/users-service</module>

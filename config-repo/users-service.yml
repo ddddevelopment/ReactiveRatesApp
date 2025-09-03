@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/users_db
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: root
+  
+  grpc:
+    server:
+      port: 9090
+      reflection:
+        enabled: true
+
+logging:
+  level:
+    com.reactiverates.users: DEBUG
+
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true

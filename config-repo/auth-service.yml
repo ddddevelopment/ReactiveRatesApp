@@ -1,0 +1,33 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/authdb
+    username: postgres
+    password: root
+  
+  grpc:
+    client:
+      channels:
+        users-service:
+          address: localhost:9090
+          negotiation-type: plaintext
+
+jwt:
+  access-token:
+    expiration: 900000  # 15 минут
+  refresh-token:
+    expiration: 604800000  # 7 дней
+
+logging:
+  level:
+    com.reactiverates.auth: DEBUG
+
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
